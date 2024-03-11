@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8b147cc7-4421-4832-b7e4-7529a6ac7740" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<import doc:name="Import" doc:id="a8477939-d7c8-4d49-95a4-02be8cd68d14" file="common-error-handler.xml" />
+	<flow name="demo-pocFlow" doc:id="01d4bd7c-65c7-4175-a9d1-b80e84d10972" >
+		<http:listener doc:name="Listener" doc:id="a85820d9-993a-4232-84b2-48bfc8c51aa5" config-ref="HTTP_Listener_config" path="/demo-poc"/>
+		<logger level="INFO" doc:name="Logger" doc:id="04497e64-a45d-483e-8d97-fcb30bc21fe8" message="#[payload]"/>
+		<http:request method="GET" doc:name="Request" doc:id="6b76be56-e07c-4562-a703-2b4384276906" url="dgshgf" />
+		<error-handler ref="common-error-handlerError_Handler" />
+	</flow>
+</mule>
